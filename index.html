@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="author" content="Illya Veklenko" />
+
+  <title>Search for Instagram</title>
+  
+  <link rel="stylesheet" href="lib/Bootstrap/Bootstrap-2.3.2/css/bootstrap.css"/>
+  <link rel="stylesheet" href="css/InstagramClient.css"/>
+</head>
+<body>
+<div id="app">
+  <header class="top-bar">
+    <h1 class="logo">
+      <a href="#" >Search</a>
+    </h1>
+  </header>
+  <section>
+    <div class="wrapper">
+      <div class="results">
+        <div class="results-item">
+          <div class="results-center">
+            <form class="form-search">
+              <div class="input-append">
+                <input id="tag" type="text" class="span2 search-query" placeholder="Search by tags.."/><button id="search" class="btn" type="button"><i class="icon-search"></i> Search</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div id="results"> </div>
+        <div class="results-item  results-footer">
+          <div class="results-center">
+            <div class="search-container">
+              <button id="more" class="btn hide" type="button">Load more</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+  </section>
+</div>
+  <script id="photo-template" type="text/template">
+    <div class="results-sidebar">
+      <div class="results-sidebar-bookmark">
+        <div class="results-sidebar-info">
+          <a class="results-sidebar-username"><%= user.username %></a>
+          <span class="results-sidebar-timestamp"> <%= created_time_text %></span>
+        </div>
+        <a>
+          <div class="results-avatar" style="background-image: url(<%= user.profile_picture %>)"></div>
+        </a>
+      </div>
+    </div>
+    <div class="results-center">
+      <div class="results-card">
+        <div class="results-photo-container">
+          <div class="results-photo" style="background-image: url(<%= images.standard_resolution.url %>)"></div>
+        </div>
+        <div class="results-likes"><i class="icon-heart results-likes-icon"></i><%= likes.count %></div>
+        <% if (caption && caption.text) { %>
+          <div class="results-caption">
+            <div class="results-avatar" style="background-image: url(<%= caption.from.profile_picture %>)"></div>
+            <a><%= caption.from.username %></a> <%= caption.text %>
+          </div>
+        <% } %>
+        <div class="results-comments">Comments: <%= comments.count %></div>
+      </div>  
+    </div>
+  </script>
+  
+  <script data-main="js/main.js" src="lib/Require/require-2.1.15.js"></script>
+</body>
+</html>
