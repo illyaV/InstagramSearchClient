@@ -8,7 +8,7 @@ function($, Backbone, _) {
     template: _.template($("#comment-template").html()),
     events: {
       "keypress .comment-input": "makeComment",
-      "click .all-comments": "showAllComments"
+      "click .all-comments":     "showAllComments"
     },
     initialize: function() {
 
