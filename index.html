@@ -64,9 +64,19 @@
             <a><%= caption.from.username %></a> <%= caption.text %>
           </div>
         <% } %>
-        <div class="results-comments">Comments: <%= comments.count %></div>
+        <div class="results-comments"></div>
       </div>  
     </div>
+  </script>
+
+  <script id="comment-template" type="text/template">
+    Comments: <%= count %>
+    <% _.each(data, function(item){%>
+      <div class="results-caption">
+        <div class="results-avatar" style="background-image: url(<%= item.from.profile_picture %>)"></div>
+        <a><%= item.from.username %></a> <%= item.text %>
+      </div>
+    <%}); %>
   </script>
   
   <script data-main="js/main.js" src="lib/Require/require-2.1.15.js"></script>

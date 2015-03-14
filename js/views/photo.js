@@ -2,9 +2,11 @@ define([
   'jquery',
   'backbone',
   //'underscore',
-  'common'
+  'common',
+  'models/comments',
+  'views/comments'
 ],
-function($, Backbone, Common){
+function($, Backbone, Common, CommentsModel, CommentsView){
   'use strict';
   
   var PhotoView = Backbone.View.extend({
@@ -18,17 +20,24 @@ function($, Backbone, Common){
 	  },
 
     render: function() {
-		  this.$el.html(this.template(this.model.toJSON()));
-		  this.onImgLoad();
+      this.$el.html(this.template(this.model.toJSON()));
+
+		  var comments = new CommentsModel(this.model.get('comments')),
+          commentsView = new CommentsView({model: comments});
+      
+      commentsView.setElement(this.$(".results-comments").get(0));		  
+      commentsView.render();
+      
+      this.onImgLoad();
 		  return this;
     },
 
     onImgLoad: function () {
   	  var self = this;
 
-  	  $('<img>').load(function(){
+  	  $('<img>').load(function() {
         self.$(".results-photo").addClass("loaded");
-      }).attr('src',function(){
+      }).attr('src', function() {
         var imgUrl = self.$(".results-photo").css('background-image');
         
         imgUrl = imgUrl.substring(4, imgUrl .length-1);
